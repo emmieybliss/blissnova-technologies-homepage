@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlissNova Technologies® | Africa's Digital Innovation Powerhouse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --ink: #0a0a0f;
+    --paper: #f5f3ee;
+    --gold: #e8b84b;
+    --gold-light: #f5d07a;
+    --electric: #00e5ff;
+    --soft-white: #fafaf7;
+    --muted: #6b6b78;
+    --border: rgba(232,184,75,0.18);
+    --card-bg: rgba(255,255,255,0.04);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--ink);
+    color: var(--paper);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 5vw;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.35rem;
+    letter-spacing: -0.03em;
+  }
+
+  .logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(245,243,238,0.7);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--ink);
+    padding: 0.55rem 1.4rem;
+    border-radius: 2px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 5vw 6rem;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232,184,75,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,184,75,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(232,184,75,0.12) 0%, transparent 65%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .rc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(232,184,75,0.1);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.35rem 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 2rem;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .rc-badge::before {
+    content: '●';
+    animation: pulse 2s infinite;
+    color: #00e87a;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.9s ease 0.15s both;
+  }
+
+  h1 .line-accent { color: var(--gold); display: block; }
+
+  .hero-sub {
+    max-width: 580px;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    color: rgba(245,243,238,0.65);
+    font-weight: 300;
+    margin: 0 auto 2.5rem;
+    animation: fadeUp 0.9s ease 0.3s both;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.9s ease 0.45s both;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--ink);
+    padding: 0.9rem 2.2rem;
+    border-radius: 2px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.15);
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+
+  .btn-primary:hover::after { transform: translateX(0); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(232,184,75,0.35); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--paper);
+    padding: 0.9rem 2.2rem;
+    border-radius: 2px;
+    border: 1px solid rgba(245,243,238,0.25);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    animation: fadeUp 1s ease 0.9s both;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollDown 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollDown {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.5); opacity: 0.5; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTIONS SHARED ─── */
+  section { position: relative; z-index: 1; }
+
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+
+  .section-title span { color: var(--gold); }
+
+  /* ─── STATS STRIP ─── */
+  #stats {
+    background: var(--gold);
+    padding: 2.5rem 5vw;
+    overflow: hidden;
+  }
+
+  .stats-ticker {
+    display: flex;
+    gap: 0;
+    animation: ticker 25s linear infinite;
+    white-space: nowrap;
+  }
+
+  .stats-ticker-inner {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--ink);
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.7;
+  }
+
+  .stat-divider {
+    width: 4px;
+    height: 4px;
+    background: var(--ink);
+    border-radius: 50%;
+    opacity: 0.3;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ─── ABOUT ─── */
+  #about {
+    padding: 8rem 5vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .about-text p {
+    color: rgba(245,243,238,0.65);
+    font-size: 1.05rem;
+    font-weight: 300;
+    margin-top: 1.25rem;
+    line-height: 1.8;
+  }
+
+  .about-details {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .about-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(245,243,238,0.5);
+    letter-spacing: 0.06em;
+  }
+
+  .about-detail strong { color: var(--gold); }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .about-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .value-item {
+    background: rgba(232,184,75,0.05);
+    border: 1px solid rgba(232,184,75,0.12);
+    border-radius: 3px;
+    padding: 1.25rem;
+  }
+
+  .value-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+
+  .value-item h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .value-item p {
+    font-size: 0.78rem;
+    color: rgba(245,243,238,0.5);
+    line-height: 1.5;
+  }
+
+  /* ─── PRODUCTS ─── */
+  #products {
+    padding: 8rem 5vw;
+    background: rgba(255,255,255,0.015);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .products-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 4rem;
+  }
+
+  .products-header p {
+    color: rgba(245,243,238,0.55);
+    font-size: 1.05rem;
+    font-weight: 300;
+    margin-top: 1rem;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    max-width: 1280px;
+    margin: 0 auto;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .product-card {
+    background: #0d0d12;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .product-card:hover {
+    background: #111118;
+  }
+
+  .product-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(232,184,75,0.06), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .product-card:hover::after { opacity: 1; }
+
+  .product-screenshot {
+    width: 100%;
+    height: 180px;
+    border-radius: 3px;
+    object-fit: cover;
+    object-position: top;
+    border: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 1.5rem;
+    background: #1a1a24;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .screenshot-mock {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .mock-topbar {
+    height: 28px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
+  .mock-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  .mock-body {
+    flex: 1;
+    padding: 10px;
+    overflow: hidden;
+  }
+
+  .mock-hero-strip {
+    height: 45px;
+    border-radius: 2px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mock-title-text {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .mock-cards-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    margin-bottom: 6px;
+  }
+
+  .mock-mini-card {
+    height: 28px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .mock-text-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .mock-line {
+    height: 6px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.07);
+  }
+
+  .product-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.6rem;
+  }
+
+  .product-card p {
+    color: rgba(245,243,238,0.55);
+    font-size: 0.875rem;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .product-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold);
+    transition: gap 0.2s;
+  }
+
+  .product-card:hover .product-link { gap: 0.75rem; }
+
+  .product-status {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  .status-live {
+    background: rgba(0,232,122,0.1);
+    color: #00e87a;
+    border: 1px solid rgba(0,232,122,0.2);
+  }
+
+  .status-beta {
+    background: rgba(232,184,75,0.1);
+    color: var(--gold);
+    border: 1px solid var(--border);
+  }
+
+  /* SAAS TOOLS ROW */
+  .saas-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    max-width: 1280px;
+    margin: 1.5px auto 0;
+    background: var(--border);
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+  }
+
+  .saas-card {
+    background: #0d0d12;
+    padding: 1.75rem 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: background 0.3s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .saas-card:hover { background: #111118; }
+
+  .saas-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .saas-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .saas-card p {
+    font-size: 0.78rem;
+    color: rgba(245,243,238,0.45);
+    line-height: 1.5;
+  }
+
+  /* ─── DEMO VIDEO ─── */
+  #demo {
+    padding: 8rem 5vw;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .demo-wrapper {
+    margin-top: 3rem;
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    aspect-ratio: 16/8;
+    background: #0d0d12;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .demo-bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232,184,75,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,184,75,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .demo-content {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .play-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1.8rem;
+    color: var(--ink);
+    box-shadow: 0 0 0 0 rgba(232,184,75,0.4);
+    animation: playPulse 2.5s ease-in-out infinite;
+  }
+
+  .play-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 12px rgba(232,184,75,0.15);
+  }
+
+  @keyframes playPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(232,184,75,0.4); }
+    50% { box-shadow: 0 0 0 20px rgba(232,184,75,0); }
+  }
+
+  .demo-content h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .demo-content p {
+    color: rgba(245,243,238,0.5);
+    font-size: 0.9rem;
+  }
+
+  /* Dashboard Preview Strip */
+  .dashboard-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .dash-card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dash-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .dash-card-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .dash-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    background: rgba(0,232,122,0.1);
+    color: #00e87a;
+    letter-spacing: 0.08em;
+  }
+
+  .dash-stat-big {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .dash-stat-sub {
+    font-size: 0.8rem;
+    color: rgba(245,243,238,0.45);
+  }
+
+  /* ─── CHARTS ─── */
+  #analytics {
+    padding: 8rem 5vw;
+    background: rgba(255,255,255,0.015);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .charts-header {
+    max-width: 1280px;
+    margin: 0 auto 3rem;
+  }
+
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .chart-card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.75rem;
+    position: relative;
+  }
+
+  .chart-card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .chart-card-sub {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  canvas { max-height: 280px; }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials {
+    padding: 8rem 5vw;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .testimonials-header {
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto 4rem;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .testi-card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .testi-card:hover {
+    border-color: rgba(232,184,75,0.35);
+    transform: translateY(-4px);
+  }
+
+  .testi-quote {
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--gold);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+  }
+
+  .testi-text {
+    font-size: 0.9rem;
+    color: rgba(245,243,238,0.7);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+  }
+
+  .testi-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), #c8943a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+
+  .testi-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .testi-role {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0.1rem;
+  }
+
+  .testi-stars {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.75rem;
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── TECH STACK / WHY SECTION ─── */
+  #why {
+    padding: 8rem 5vw;
+    background: rgba(255,255,255,0.015);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .why-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .why-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .why-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .why-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+
+  .why-item h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .why-item p {
+    font-size: 0.875rem;
+    color: rgba(245,243,238,0.5);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .why-visual-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .why-mini-card {
+    background: rgba(232,184,75,0.04);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .why-mini-card .icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+
+  .why-mini-card h5 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .why-mini-card p {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  /* ─── CONTACT / CTA ─── */
+  #contact {
+    padding: 10rem 5vw;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(232,184,75,0.1) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  #contact .section-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    margin-bottom: 1.25rem;
+  }
+
+  #contact p {
+    color: rgba(245,243,238,0.55);
+    font-size: 1.1rem;
+    font-weight: 300;
+    max-width: 520px;
+    margin: 0 auto 3rem;
+  }
+
+  .contact-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.03em;
+  }
+
+  .footer-logo span { color: var(--gold); }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: rgba(245,243,238,0.45);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(245,243,238,0.25);
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── REVEAL ANIMATIONS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .products-grid { grid-template-columns: 1fr; }
+    .saas-row { grid-template-columns: 1fr; }
+    .charts-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .why-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .dashboard-strip { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="logo">Bliss<span>Nova</span> Technologies®</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#analytics">Analytics</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://allbiohub.com/contact-us/" class="nav-cta">Work With Us</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+
+  <div class="rc-badge">CAC Registered · RC No. 8625480 · Est. 2020</div>
+
+  <h1>
+    Africa's Digital
+    <span class="line-accent">Innovation Engine</span>
+  </h1>
+
+  <p class="hero-sub">
+    BlissNova Technologies builds scalable digital platforms, SaaS tools, and content ecosystems that serve Africa's fast-growing internet economy.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="#products" class="btn-primary">Explore Our Products →</a>
+    <a href="#contact" class="btn-ghost">Get In Touch</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    SCROLL
+  </div>
+</section>
+
+<!-- ─── STATS STRIP ─── -->
+<div id="stats">
+  <div class="stats-ticker">
+    <div class="stats-ticker-inner">
+      <div class="stat-item">
+        <div>
+          <div class="stat-num">10,000+</div>
+          <div class="stat-label">Active Users</div>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div>
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Live Products</div>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div>
+          <div class="stat-num">500K+</div>
+          <div class="stat-label">Monthly Pageviews</div>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div>
+          <div class="stat-num">2020</div>
+          <div class="stat-label">Founded in Lagos</div>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div>
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Nigerian Brands Covered</div>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div>
+          <div class="stat-num">7+</div>
+          <div class="stat-label">SaaS Tools Built</div>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+    </div>
+    <!-- duplicate for seamless loop -->
+    <div class="stats-ticker-inner" aria-hidden="true">
+      <div class="stat-item">
+        <div>
+          <div class="stat-num">10,000+</div>
+          <div class="stat-label">Active Users</div>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div>
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Live Products</div>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div>
+          <div class="stat-num">500K+</div>
+          <div class="stat-label">Monthly Pageviews</div>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div>
+          <div class="stat-num">2020</div>
+          <div class="stat-label">Founded in Lagos</div>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div>
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Nigerian Brands Covered</div>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div>
+          <div class="stat-num">7+</div>
+          <div class="stat-label">SaaS Tools Built</div>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="about-text reveal">
+    <div class="section-tag">Who We Are</div>
+    <h2 class="section-title">Building the <span>Digital Future</span> of Africa</h2>
+    <p>
+      BlissNova Technologies is a Lagos-based technology company building next-generation digital platforms, SaaS tools, content ecosystems, and marketplace products engineered for Africa's rapidly expanding internet economy.
+    </p>
+    <p>
+      From biography and entertainment media to domain trading and digital asset marketplaces, we create infrastructure that empowers Nigerian creators, entrepreneurs, and businesses to thrive online — with or without Western gatekeepers.
+    </p>
+    <div class="about-details">
+      <div class="about-detail">📍 <strong>Headquarters:</strong> Lagos, Nigeria</div>
+      <div class="about-detail">🏛️ <strong>Reg. Authority:</strong> Corporate Affairs Commission (CAC)</div>
+      <div class="about-detail">🔢 <strong>RC Number:</strong> 8625480</div>
+      <div class="about-detail">📅 <strong>Founded:</strong> 2020</div>
+      <div class="about-detail">🌍 <strong>Market Focus:</strong> Nigeria & Pan-African Digital Economy</div>
+    </div>
+  </div>
+
+  <div class="about-visual reveal">
+    <div class="about-card">
+      <h3 class="section-title" style="font-size:1.4rem; margin-bottom:1.25rem;">Our <span>Pillars</span></h3>
+      <div class="about-values">
+        <div class="value-item">
+          <div class="value-icon">🧠</div>
+          <h4>Content Intelligence</h4>
+          <p>SEO-first editorial systems for African media audiences.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🛒</div>
+          <h4>Digital Marketplaces</h4>
+          <p>Verified platforms for buying and selling digital assets.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">⚙️</div>
+          <h4>SaaS Tools</h4>
+          <p>Free, powerful alternatives to overpriced Western SaaS.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🌍</div>
+          <h4>Africa-First Design</h4>
+          <p>Products built for how Africans actually use the internet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRODUCTS ─── -->
+<section id="products">
+  <div class="products-header reveal">
+    <div class="section-tag">Our Portfolio</div>
+    <h2 class="section-title">Platforms & <span>Products</span></h2>
+    <p>Every product we build targets a real gap in Africa's digital ecosystem — with quality that competes globally.</p>
+  </div>
+
+  <div class="products-grid reveal">
+
+    <!-- AllBioHub -->
+    <a href="https://allbiohub.com" target="_blank" class="product-card">
+      <span class="product-status status-live">● Live</span>
+      <div class="product-screenshot">
+        <div class="screenshot-mock">
+          <div class="mock-topbar">
+            <div class="mock-dot" style="background:#ff5f57;"></div>
+            <div class="mock-dot" style="background:#febc2e;"></div>
+            <div class="mock-dot" style="background:#28c840;"></div>
+          </div>
+          <div class="mock-body">
+            <div class="mock-hero-strip" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
+              <span class="mock-title-text" style="color:#e8b84b;">AllBioHub</span>
+            </div>
+            <div class="mock-cards-row">
+              <div class="mock-mini-card"></div>
+              <div class="mock-mini-card"></div>
+              <div class="mock-mini-card"></div>
+            </div>
+            <div class="mock-text-lines">
+              <div class="mock-line" style="width:90%;"></div>
+              <div class="mock-line" style="width:70%;"></div>
+              <div class="mock-line" style="width:80%;"></div>
+              <div class="mock-line" style="width:55%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-tag">Content Platform</div>
+      <h3>AllBioHub.com</h3>
+      <p>Nigeria's premier biography and entertainment content platform — covering public figures, celebrities, politicians, and influencers with SEO-optimised, deeply researched editorial content.</p>
+      <span class="product-link">Visit Live Site ↗</span>
+    </a>
+
+    <!-- AfterLogs -->
+    <a href="https://afterlogs.com" target="_blank" class="product-card">
+      <span class="product-status status-live">● Live</span>
+      <div class="product-screenshot">
+        <div class="screenshot-mock">
+          <div class="mock-topbar">
+            <div class="mock-dot" style="background:#ff5f57;"></div>
+            <div class="mock-dot" style="background:#febc2e;"></div>
+            <div class="mock-dot" style="background:#28c840;"></div>
+          </div>
+          <div class="mock-body">
+            <div class="mock-hero-strip" style="background:linear-gradient(135deg,#0a1628,#102040);">
+              <span class="mock-title-text" style="color:#00e5ff;">AfterLogs</span>
+            </div>
+            <div class="mock-cards-row">
+              <div class="mock-mini-card" style="background:rgba(0,229,255,0.08);"></div>
+              <div class="mock-mini-card" style="background:rgba(0,229,255,0.08);"></div>
+              <div class="mock-mini-card" style="background:rgba(0,229,255,0.08);"></div>
+            </div>
+            <div class="mock-text-lines">
+              <div class="mock-line" style="width:85%; background:rgba(0,229,255,0.1);"></div>
+              <div class="mock-line" style="width:65%; background:rgba(0,229,255,0.1);"></div>
+              <div class="mock-line" style="width:75%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-tag">Digital Marketplace</div>
+      <h3>AfterLogs.com</h3>
+      <p>Africa's trusted marketplace for buying and selling verified digital assets — websites, social media accounts, AdSense properties, and monetised online businesses with transparent valuation.</p>
+      <span class="product-link">Visit Live Site ↗</span>
+    </a>
+
+    <!-- BlissDomain -->
+    <a href="https://blissdomain.com" target="_blank" class="product-card">
+      <span class="product-status status-live">● Live</span>
+      <div class="product-screenshot">
+        <div class="screenshot-mock">
+          <div class="mock-topbar">
+            <div class="mock-dot" style="background:#ff5f57;"></div>
+            <div class="mock-dot" style="background:#febc2e;"></div>
+            <div class="mock-dot" style="background:#28c840;"></div>
+          </div>
+          <div class="mock-body">
+            <div class="mock-hero-strip" style="background:linear-gradient(135deg,#0f1a0f,#1a2e1a);">
+              <span class="mock-title-text" style="color:#6ecc5e;">BlissDomain</span>
+            </div>
+            <div class="mock-cards-row">
+              <div class="mock-mini-card" style="background:rgba(110,204,94,0.07);"></div>
+              <div class="mock-mini-card" style="background:rgba(110,204,94,0.07);"></div>
+              <div class="mock-mini-card" style="background:rgba(110,204,94,0.07);"></div>
+            </div>
+            <div class="mock-text-lines">
+              <div class="mock-line" style="width:80%; background:rgba(110,204,94,0.08);"></div>
+              <div class="mock-line" style="width:60%;"></div>
+              <div class="mock-line" style="width:90%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-tag">Domain Marketplace</div>
+      <h3>BlissDomain.com</h3>
+      <p>A curated domain name marketplace for African buyers and sellers — list, discover, and acquire premium domains with DNS-verified ownership, buy-now pricing, and secure transfers.</p>
+      <span class="product-link">Visit Live Site ↗</span>
+    </a>
+
+  </div>
+
+  <!-- BlissNovaHost + TokTik — Full-Width Feature Row -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5px; max-width:1280px; margin:1.5px auto 0; background:var(--border); border-radius:0; overflow:hidden;" class="reveal">
+
+    <!-- BlissNovaHost -->
+    <a href="https://blissnovahost.com" target="_blank" class="product-card" style="background:#0c0f0c;">
+      <span class="product-status status-live">● Live</span>
+      <div class="product-screenshot">
+        <div class="screenshot-mock">
+          <div class="mock-topbar">
+            <div class="mock-dot" style="background:#ff5f57;"></div>
+            <div class="mock-dot" style="background:#febc2e;"></div>
+            <div class="mock-dot" style="background:#28c840;"></div>
+          </div>
+          <div class="mock-body">
+            <div class="mock-hero-strip" style="background:linear-gradient(135deg,#071a1a,#0d2e2e);">
+              <span class="mock-title-text" style="color:#00e5ff;">BlissNovaHost</span>
+            </div>
+            <div class="mock-cards-row">
+              <div class="mock-mini-card" style="background:rgba(0,229,255,0.06);"></div>
+              <div class="mock-mini-card" style="background:rgba(0,229,255,0.06);"></div>
+              <div class="mock-mini-card" style="background:rgba(0,229,255,0.06);"></div>
+            </div>
+            <div class="mock-text-lines">
+              <div class="mock-line" style="width:88%; background:rgba(0,229,255,0.08);"></div>
+              <div class="mock-line" style="width:65%;"></div>
+              <div class="mock-line" style="width:78%; background:rgba(0,229,255,0.05);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-tag">Web Hosting & Domains</div>
+      <h3>BlissNovaHost.com</h3>
+      <p>Affordable, reliable web hosting and domain registration built for Nigerian businesses, entrepreneurs, and digital creators — fast servers, easy control panels, and local support that actually responds.</p>
+      <span class="product-link">Visit Live Site ↗</span>
+    </a>
+
+    <!-- TokTik Saver -->
+    <a href="https://bit.ly/tiktoksaver" target="_blank" class="product-card" style="background:#0f0a0a;">
+      <span class="product-status status-live">● Live</span>
+      <div class="product-screenshot">
+        <div class="screenshot-mock">
+          <div class="mock-topbar">
+            <div class="mock-dot" style="background:#ff5f57;"></div>
+            <div class="mock-dot" style="background:#febc2e;"></div>
+            <div class="mock-dot" style="background:#28c840;"></div>
+          </div>
+          <div class="mock-body">
+            <div class="mock-hero-strip" style="background:linear-gradient(135deg,#1a0808,#2e0d0d);">
+              <span class="mock-title-text" style="color:#ff6b6b;">TokTik Saver</span>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:center; height:60px; gap:8px;">
+              <div style="flex:1; height:28px; background:rgba(255,107,107,0.08); border:1px solid rgba(255,107,107,0.12); border-radius:2px;"></div>
+              <div style="width:50px; height:28px; background:rgba(255,107,107,0.18); border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; color:#ff6b6b; font-family:'Space Mono',monospace;">↓</div>
+            </div>
+            <div class="mock-text-lines">
+              <div class="mock-line" style="width:70%; background:rgba(255,107,107,0.07);"></div>
+              <div class="mock-line" style="width:55%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-tag">Free Utility Tool</div>
+      <h3>TokTik Saver</h3>
+      <p>The cleanest, fastest TikTok video downloader in Africa — no watermarks, no registration, no redirects. Paste a link, download instantly. Built for mobile-first users on any connection speed.</p>
+      <span class="product-link">Use Free Tool ↗</span>
+    </a>
+
+  </div>
+
+  <!-- SaaS Row -->
+  <div class="saas-row reveal">
+    <a href="#" class="saas-card">
+      <div class="saas-icon" style="background:rgba(232,184,75,0.08);">📄</div>
+      <div>
+        <h4>ResumeBliss</h4>
+        <p>Free professional CV & resume builder — no paywalls, no limits. Competes with Zety and Resume.io.</p>
+      </div>
+    </a>
+    <a href="#" class="saas-card">
+      <div class="saas-icon" style="background:rgba(0,229,255,0.08);">📊</div>
+      <div>
+        <h4>AfterLogs Valuation Tool</h4>
+        <p>Instant digital asset valuation calculator for websites, social accounts, and online businesses.</p>
+      </div>
+    </a>
+    <a href="#" class="saas-card">
+      <div class="saas-icon" style="background:rgba(0,232,122,0.08);">🚀</div>
+      <div>
+        <h4>Landing Page Builder</h4>
+        <p>Drag-and-drop landing page creator designed for African entrepreneurs and digital marketers.</p>
+      </div>
+    </a>
+    <a href="https://bit.ly/tiktoksaver" target="_blank" class="saas-card">
+      <div class="saas-icon" style="background:rgba(255,80,80,0.1); position:relative;">⬇️
+        <span style="position:absolute;top:-6px;right:-6px;background:#00e87a;color:#0a0a0f;font-family:'Space Mono',monospace;font-size:0.48rem;padding:0.15rem 0.35rem;border-radius:2px;font-weight:700;letter-spacing:0.06em;">LIVE</span>
+      </div>
+      <div>
+        <h4>TokTik Saver <span style="font-family:'Space Mono',monospace;font-size:0.65rem;color:#00e87a;letter-spacing:0.08em;margin-left:0.3rem;">● Live</span></h4>
+        <p>Clean, watermark-free TikTok video downloader — instant saves, no sign-up, built for mobile-first African users.</p>
+      </div>
+    </a>
+    <a href="https://blissnovahost.com" target="_blank" class="saas-card">
+      <div class="saas-icon" style="background:rgba(0,229,255,0.1); position:relative;">🖥️
+        <span style="position:absolute;top:-6px;right:-6px;background:#00e87a;color:#0a0a0f;font-family:'Space Mono',monospace;font-size:0.48rem;padding:0.15rem 0.35rem;border-radius:2px;font-weight:700;letter-spacing:0.06em;">LIVE</span>
+      </div>
+      <div>
+        <h4>BlissNovaHost <span style="font-family:'Space Mono',monospace;font-size:0.65rem;color:#00e87a;letter-spacing:0.08em;margin-left:0.3rem;">● Live</span></h4>
+        <p>Affordable web hosting & domain registration tailored for African businesses, European startups, and US creators — powered by BlissNova Technologies.</p>
+      </div>
+    </a>
+    <a href="#" class="saas-card">
+      <div class="saas-icon" style="background:rgba(232,184,75,0.08);">⚡</div>
+      <div>
+        <h4>More Tools — Coming Soon</h4>
+        <p>New SaaS utilities shipping regularly under the BlissNova Technologies umbrella brand.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ─── DEMO VIDEO ─── -->
+<section id="demo">
+  <div class="section-tag reveal">Product Demo</div>
+  <h2 class="section-title reveal">See BlissNova <span>in Action</span></h2>
+
+  <div class="demo-wrapper reveal">
+    <div class="demo-bg-grid"></div>
+    <div class="demo-content">
+      <div class="play-btn" onclick="alert('Demo video coming soon! Visit our live products above.')">▶</div>
+      <h3>Product Walkthrough</h3>
+      <p>Watch how BlissNova's platforms serve 10,000+ users across Nigeria and Africa</p>
+    </div>
+  </div>
+
+  <!-- SaaS Dashboard Preview -->
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="margin-top:3rem; padding:1.75rem; background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:4px;" class="reveal">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; border-bottom:1px solid var(--border); padding-bottom:1rem;">
+        <div>
+          <div style="font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.1em; color:var(--muted); text-transform:uppercase; margin-bottom:0.25rem;">BlissNova Admin</div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:1.1rem;">Platform Dashboard</div>
+        </div>
+        <div style="display:flex; gap:0.5rem;">
+          <div style="background:rgba(0,232,122,0.1); color:#00e87a; border:1px solid rgba(0,232,122,0.2); padding:0.3rem 0.75rem; border-radius:2px; font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.08em;">● ALL SYSTEMS LIVE</div>
+        </div>
+      </div>
+      <div class="dashboard-strip">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div class="dash-card-title">Total Platform Users</div>
+            <div class="dash-badge">↑ +23%</div>
+          </div>
+          <div class="dash-stat-big">10,481</div>
+          <div class="dash-stat-sub">Across all BlissNova products</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div class="dash-card-title">Monthly Pageviews</div>
+            <div class="dash-badge">↑ +41%</div>
+          </div>
+          <div class="dash-stat-big">547K</div>
+          <div class="dash-stat-sub">AllBioHub + AfterLogs + BlissDomain</div>
+        </div>
+      </div>
+      <div class="dashboard-strip" style="margin-top:1rem;">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div class="dash-card-title">Live Products</div>
+            <div class="dash-badge">● ACTIVE</div>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.5rem;">
+            <span style="font-family:'Space Mono',monospace; font-size:0.7rem; padding:0.3rem 0.6rem; border:1px solid rgba(0,232,122,0.25); color:#00e87a; border-radius:2px;">AllBioHub</span>
+            <span style="font-family:'Space Mono',monospace; font-size:0.7rem; padding:0.3rem 0.6rem; border:1px solid rgba(0,232,122,0.25); color:#00e87a; border-radius:2px;">AfterLogs</span>
+            <span style="font-family:'Space Mono',monospace; font-size:0.7rem; padding:0.3rem 0.6rem; border:1px solid rgba(0,232,122,0.25); color:#00e87a; border-radius:2px;">BlissDomain</span>
+            <span style="font-family:'Space Mono',monospace; font-size:0.7rem; padding:0.3rem 0.6rem; border:1px solid rgba(0,232,122,0.25); color:#00e87a; border-radius:2px;">TokTik Saver</span>
+            <span style="font-family:'Space Mono',monospace; font-size:0.7rem; padding:0.3rem 0.6rem; border:1px solid rgba(0,232,122,0.25); color:#00e87a; border-radius:2px;">BlissNovaHost</span>
+            <span style="font-family:'Space Mono',monospace; font-size:0.7rem; padding:0.3rem 0.6rem; border:1px solid rgba(232,184,75,0.3); color:var(--gold); border-radius:2px;">ResumeBliss</span>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div class="dash-card-title">Avg. Session Duration</div>
+            <div class="dash-badge">↑ +11%</div>
+          </div>
+          <div class="dash-stat-big">3:42</div>
+          <div class="dash-stat-sub">Minutes per visit — above industry avg</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ANALYTICS CHARTS ─── -->
+<section id="analytics">
+  <div class="charts-header reveal">
+    <div class="section-tag">Platform Analytics</div>
+    <h2 class="section-title">Growth <span>by the Numbers</span></h2>
+  </div>
+
+  <div class="charts-grid reveal">
+    <div class="chart-card">
+      <div class="chart-card-title">Monthly User Growth</div>
+      <div class="chart-card-sub">Cumulative users across all BlissNova platforms — Jan to Dec 2024</div>
+      <canvas id="growthChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-title">Traffic by Product</div>
+      <div class="chart-card-sub">Share of total monthly pageviews</div>
+      <canvas id="donutChart"></canvas>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:1.5rem; max-width:1280px; margin:1.5rem auto 0;" class="reveal">
+    <div class="chart-card">
+      <div class="chart-card-title">Device Split</div>
+      <div class="chart-card-sub">Mobile vs Desktop users</div>
+      <canvas id="deviceChart" style="max-height:180px;"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-title">Top Traffic Sources</div>
+      <div class="chart-card-sub">Organic, Social, Direct, Referral</div>
+      <canvas id="sourceChart" style="max-height:180px;"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-title">Weekly Active Users</div>
+      <div class="chart-card-sub">Last 8 weeks rolling average</div>
+      <canvas id="weeklyChart" style="max-height:180px;"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section id="testimonials">
+  <div class="testimonials-header reveal">
+    <div class="section-tag" style="justify-content:center;">User Reviews</div>
+    <h2 class="section-title">What Our <span>Users Say</span></h2>
+  </div>
+
+  <div class="testimonials-grid reveal">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">AllBioHub is my first stop for researching Nigerian public figures. The depth of information is unmatched by any other local platform — and it actually loads fast on 4G!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AO</div>
+        <div>
+          <div class="testi-name">Adaeze Okonkwo</div>
+          <div class="testi-role">Journalist · Lagos</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">AfterLogs helped me sell my monetised blog in under two weeks. The valuation tool gave me confidence in my asking price, and the buyer verification felt genuinely secure.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">BF</div>
+        <div>
+          <div class="testi-name">Babatunde Fashola</div>
+          <div class="testi-role">Digital Entrepreneur · Abuja</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">ResumeBliss is exactly what Nigerian fresh graduates need. No subscription, no annoying paywalls, and the templates are actually modern and ATS-friendly.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">CF</div>
+        <div>
+          <div class="testi-name">Chidinma Fernandez</div>
+          <div class="testi-role">Graduate · University of Lagos</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★☆</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">BlissDomain is filling a gap nobody else is filling in Nigeria. I bought three domains through the platform and the DNS verification process was smooth and trustworthy.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">EI</div>
+        <div>
+          <div class="testi-name">Emmanuel Ikenna</div>
+          <div class="testi-role">Startup Founder · Port Harcourt</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">TikSave is the cleanest, most reliable TikTok downloader I've found — no shady redirects, no pop-ups. Works perfectly on my Android every time.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">KA</div>
+        <div>
+          <div class="testi-name">Kemi Adeyemi</div>
+          <div class="testi-role">Content Creator · Ibadan</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">As someone who advertises to Nigerian audiences, AllBioHub is a goldmine. Highly engaged readers, strong niche authority, and a team that actually responds to outreach.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">TN</div>
+        <div>
+          <div class="testi-name">Tobi Nwachukwu</div>
+          <div class="testi-role">Brand Manager · Lagos Fintech</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY BLISSNOVA ─── -->
+<section id="why">
+  <div class="why-inner">
+    <div class="reveal">
+      <div class="section-tag">Why BlissNova</div>
+      <h2 class="section-title">Built Different.<br><span>By Design.</span></h2>
+      <ul class="why-list">
+        <li class="why-item">
+          <span class="why-num">01</span>
+          <div>
+            <h4>Africa-Native Products</h4>
+            <p>We build for how Nigerians and Africans actually use the internet — mobile-first, data-conscious, and culturally rooted.</p>
+          </div>
+        </li>
+        <li class="why-item">
+          <span class="why-num">02</span>
+          <div>
+            <h4>Free Tools That Compete Globally</h4>
+            <p>We don't paywall features that should be free. ResumeBliss, TikSave and our other tools go toe-to-toe with expensive Western SaaS.</p>
+          </div>
+        </li>
+        <li class="why-item">
+          <span class="why-num">03</span>
+          <div>
+            <h4>Verified & Registered</h4>
+            <p>CAC-registered (RC No. 8625480) since 2020. We operate with full business transparency and legal compliance in Nigeria.</p>
+          </div>
+        </li>
+        <li class="why-item">
+          <span class="why-num">04</span>
+          <div>
+            <h4>Interconnected Ecosystem</h4>
+            <p>Our products cross-pollinate: content, marketplaces, and tools reinforce each other to create compounding value for users.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="why-visual-cards reveal">
+      <div class="why-mini-card">
+        <div class="icon">🏆</div>
+        <h5>CAC Registered</h5>
+        <p>RC No. 8625480 · 2020</p>
+      </div>
+      <div class="why-mini-card">
+        <div class="icon">📱</div>
+        <h5>Mobile First</h5>
+        <p>75%+ mobile traffic</p>
+      </div>
+      <div class="why-mini-card">
+        <div class="icon">🇳🇬</div>
+        <h5>Nigeria-Born</h5>
+        <p>Lagos HQ · Pan-African vision</p>
+      </div>
+      <div class="why-mini-card">
+        <div class="icon">⚡</div>
+        <h5>Fast Iteration</h5>
+        <p>7+ tools shipped since 2020</p>
+      </div>
+      <div class="why-mini-card">
+        <div class="icon">🔒</div>
+        <h5>User Trust</h5>
+        <p>Verified marketplace listings</p>
+      </div>
+      <div class="why-mini-card">
+        <div class="icon">📈</div>
+        <h5>Growing Fast</h5>
+        <p>+41% YoY pageview growth</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA / CONTACT ─── -->
+<section id="contact">
+  <div class="contact-glow"></div>
+  <div class="section-tag reveal" style="justify-content:center;">Get In Touch</div>
+  <h2 class="section-title reveal">Ready to <span>Partner<br>with BlissNova?</span></h2>
+  <p class="reveal">Whether you're a brand looking to advertise, a developer who wants to collaborate, or an investor interested in Africa's fastest-growing digital portfolio — we'd love to hear from you.</p>
+  <div class="contact-btns reveal">
+    <a href="mailto:hello@allbiohub.com" class="btn-primary">Email Us →</a>
+    <a href="https://allbiohub.com" target="_blank" class="btn-ghost">Visit AllBioHub</a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">Bliss<span>Nova</span>® Technologies</div>
+  <ul class="footer-links">
+    <li><a href="https://allbiohub.com" target="_blank">AllBioHub</a></li>
+    <li><a href="https://afterlogs.com" target="_blank">AfterLogs</a></li>
+    <li><a href="https://blissdomain.com" target="_blank">BlissDomain</a></li>
+    <li><a href="https://blissnovahost.com" target="_blank">BlissNovaHost</a></li>
+    <li><a href="https://bit.ly/tiktoksaver" target="_blank">TokTik Saver</a></li>
+    <li><a href="#products">SaaS Tools</a></li>
+    <li><a href="https://allbiohub.com/contact-us/">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2020–2026 BLISSNOVA TECHNOLOGIES · RC NO. 8625480 · LAGOS, NIGERIA</div>
+</footer>
+
+<!-- ─── CHARTS JS ─── -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Shared chart defaults
+  Chart.defaults.color = 'rgba(245,243,238,0.45)';
+  Chart.defaults.borderColor = 'rgba(232,184,75,0.08)';
+  Chart.defaults.font.family = "'DM Sans', sans-serif";
+
+  const gold = '#e8b84b';
+  const electric = '#00e5ff';
+  const green = '#00e87a';
+  const purple = '#b464ff';
+
+  // Growth Chart
+  new Chart(document.getElementById('growthChart'), {
+    type: 'line',
+    data: {
+      labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      datasets: [{
+        label: 'Total Users',
+        data: [1200, 2100, 3300, 4200, 5100, 6000, 6800, 7500, 8300, 9100, 9800, 10481],
+        borderColor: gold,
+        backgroundColor: 'rgba(232,184,75,0.08)',
+        borderWidth: 2.5,
+        pointBackgroundColor: gold,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        fill: true,
+        tension: 0.45,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: {
+          grid: { color: 'rgba(232,184,75,0.07)' },
+          ticks: { callback: v => v >= 1000 ? (v/1000)+'K' : v }
+        },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // Donut
+  new Chart(document.getElementById('donutChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['AllBioHub', 'AfterLogs', 'BlissDomain', 'SaaS Tools'],
+      datasets: [{
+        data: [58, 22, 13, 7],
+        backgroundColor: [gold, electric, green, purple],
+        borderWidth: 0,
+        hoverOffset: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      cutout: '68%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { padding: 16, boxWidth: 10 }
+        }
+      }
+    }
+  });
+
+  // Device Split
+  new Chart(document.getElementById('deviceChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Mobile', 'Desktop', 'Tablet'],
+      datasets: [{
+        data: [75, 21, 4],
+        backgroundColor: [gold, 'rgba(232,184,75,0.4)', 'rgba(232,184,75,0.2)'],
+        borderRadius: 3,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: {
+          grid: { color: 'rgba(232,184,75,0.07)' },
+          ticks: { callback: v => v+'%' }
+        },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // Traffic Sources
+  new Chart(document.getElementById('sourceChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Organic', 'Social', 'Direct', 'Referral'],
+      datasets: [{
+        data: [54, 26, 13, 7],
+        backgroundColor: [green, gold, electric, purple],
+        borderWidth: 0,
+        hoverOffset: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      cutout: '60%',
+      plugins: { legend: { position: 'bottom', labels: { padding: 12, boxWidth: 9 } } }
+    }
+  });
+
+  // Weekly WAU
+  new Chart(document.getElementById('weeklyChart'), {
+    type: 'line',
+    data: {
+      labels: ['W1','W2','W3','W4','W5','W6','W7','W8'],
+      datasets: [{
+        label: 'WAU',
+        data: [1820, 2100, 1980, 2350, 2600, 2480, 2780, 3100],
+        borderColor: electric,
+        backgroundColor: 'rgba(0,229,255,0.07)',
+        borderWidth: 2,
+        pointBackgroundColor: electric,
+        pointRadius: 3,
+        fill: true,
+        tension: 0.4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { grid: { color: 'rgba(0,229,255,0.06)' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ─── SCROLL REVEAL ───
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
